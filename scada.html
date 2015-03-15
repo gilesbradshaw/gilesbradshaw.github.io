@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Giles Bradshaw : Application Developer">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Giles Bradshaw</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/gilesbradshaw">View on GitHub</a>
+			<a href="\">
+				<h1 id="project_title">Giles Bradshaw</h1>
+				<h2 id="project_tagline">Application Developer</h2>
+			</a>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a id="scada" class="anchor" href="#scada" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scada</h3>
+
+<p>I have written a Batch Management and Scada System which runs as a web application in IIS.  The server is written in C# and the client runs as a Single Page Application (SPA) in a web browser.</p>
+
+<p>
+	A Configuration model defines a hierarchical structure of enterprises, sites, production zones and units.  Each zone defines a set of nodes contained in folders.  Each node points to an address in a Programmable Logic Contoller (PLC).
+	PLC data is accessed by the server via an OPC Server.
+	Each unit uses nodes to inteface to the Plc for:
+</p>
+<ul>
+	<li>Batch interface - running opeations on the unit.</li>
+	<li>Unit commands - start, hold &c.</li>
+	<li>Unit states - running, held &c.</li>
+	<li>Unit data.  Maintenance constants &c</li>
+	<li>Devices - SVG bound to nodes.</li>
+	<li>Alarms events and prompts.</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
