@@ -29,23 +29,47 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h3>
-<a id="scada" class="anchor" href="#scada" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scada</h3>
+			<a id="scada" class="anchor" href="#scada" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+			Scada
+		</h3>
 
-<p>I have written a Batch Management and Scada System which runs as a web application in IIS.  The server is written in C# and the client runs as a Single Page Application (SPA) in a web browser.</p>
+		<p>
+			I have written a Batch Management and Scada System which runs as a web application in IIS.  The server is written in C# and the client runs as a Single Page Application (SPA) in a web browser.
+		</p>
 
-<p>
-	A Configuration model defines a hierarchical structure of enterprises, sites, production zones and units.  Each zone defines a set of nodes contained in folders.  Each node points to an address in a Programmable Logic Contoller (PLC).
-	PLC data is accessed by the server via an OPC Server.
-	Each unit uses nodes to inteface to the Plc for:
-</p>
-<ul>
-	<li>Batch interface - running opeations on the unit.</li>
-	<li>Unit commands - start, hold &c.</li>
-	<li>Unit states - running, held &c.</li>
-	<li>Unit data.  Maintenance constants &c</li>
-	<li>Devices - SVG bound to nodes.</li>
-	<li>Alarms events and prompts.</li>
-</ul>
+		<p>
+			You can see a demo <a href="http://scada.gilesbradshaw.co.uk/">here</a> (it is not linked to any PLC).
+		</p>
+
+		<p>
+			A Configuration model defines a hierarchical structure of enterprises, sites, production zones and units.  Each zone defines a set of nodes contained in folders.  Each node points to an address in a Programmable Logic Contoller (PLC).
+			PLC data is accessed by the server via an OPC Server.
+			Each unit uses nodes to inteface to the Plc for:
+		</p>
+		<ul>
+			<li>Batch interface - running operations on the unit.</li>
+			<li>Unit commands - start, hold &c.</li>
+			<li>Unit states - running, held &c.</li>
+			<li>Unit data.  Maintenance constants &c</li>
+			<li>Devices - SVG bound to nodes.</li>
+			<li>Alarms events and prompts.</li>
+		</ul>
+
+		<p>
+			The front end is <em>live</em>.  It automatically updates when data on the server changes.  Data which changes can be model data (configuration, untime state ort hiostorical data) or PLC data.
+			The entity framework context used by the server has been extended to publish changes made with it using websockets.
+			When the browser fetches data using a web api it alos subscribes to it for subsequent changes.
+		</p>
+		<p>
+			It is possible to edit the model from the browser for example adding new units, editing or adding nodes, editing SVG graphics.  All such changes cause the UI to update without refresh.
+
+		</p>
+		<p>
+			The server responds to commands issued from the UI - for example setting up or starting a batch.  This causes model changes and automatic refresh.
+		</p>
+		  <p>
+			  The server subscribes to PLC data via the defined nodes.  The UI can also subscribe directly to nodes for display of devices.
+		  </p>
       </section>
     </div>
 
