@@ -58,7 +58,7 @@
 		<p>
 			The front end is <em>live</em>.  It automatically updates when data on the server changes.  Data which changes can be model data (configuration, untime state ort hiostorical data) or PLC data.
 			The entity framework context used by the server has been extended to publish changes made with it using websockets.
-			When the browser fetches data using a web api it alos subscribes to it for subsequent changes.
+			When the browser fetches data using a web api it also subscribes to it for subsequent changes.
 		</p>
 		<p>
 			It is possible to edit the model from the browser for example adding new units, editing or adding nodes, editing SVG graphics.  All such changes cause the UI to update without refresh.
@@ -70,6 +70,41 @@
 		  <p>
 			  The server subscribes to PLC data via the defined nodes.  The UI can also subscribe directly to nodes for display of devices.
 		  </p>
+	  	<h3>
+	  		<a id="ui notes" class="anchor" href="#ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+	  		Ui notes
+	  	</h3>
+		  <h4>
+			Home
+		  </h4>
+		  <p>
+			  The home page shows the basic system hierarchy - Enterpises - Sites - Zones.   Clicking on a zone takes you to the runtime view of a zone.
+			  You can always get back to the home page by clicking the home icon.
+		  </p>
+	  	<img src="/images/scada/home.png" />
+		  <h4>
+			  Runtime zone
+		  </h4>
+		  <p>
+			  The runtime zone view shows a live graphic for each unit.  Click on a unit for a detailed view and for setpoints and actuals of the current operation.  The runtime zone view also shows the current batch, unit procedure and step running on each unit.  
+		  </p>
+	  	<h4>
+	  		Navigation
+	  	</h4>
+		<p>The breadcrumb gives access to all ancestors of the currently viewed entity</p>
+	  	<img src="/images/scada/breadcrumb.png" />
+		<p>The arrow widget opens and closes a menu for the viewed entity</p>
+	  	<img src="/images/scada/arrow.png" />
+		  <p>The menu gives you access to...</p>
+		  <ul>
+			<li>Commands <img src="/images/scada/commands.png" /></li>
+	  		<li>Administrative views and functions <img src="/images/scada/admin.png" /></li>
+	  		<li>User views and functions <img src="/images/scada/user.png" /></li>
+	  		<li>Related entities in the model <img src="/images/scada/related.png" /></li>
+		  </ul>
+		  <p>Entities have a combination of configuration, runtime and history.  You can switch between these</p>
+	  		<img src="/images/scada/related.png" />
+		  <p>For example from the runtime zone view you can view all the current batches for a zone, from the history zone view you can view all the batches that have ever run for a zone.</p>
       </section>
     </div>
 
