@@ -56,9 +56,7 @@
 		</ul>
 
 		<p>
-			The front end is <em>live</em>.  It automatically updates when data on the server changes.  Data which changes can be model data (configuration, untime state ort hiostorical data) or PLC data.
-			The entity framework context used by the server has been extended to publish changes made with it using websockets.
-			When the browser fetches data using a web api it also subscribes to it for subsequent changes.
+			The front end is <em>live</em>.  It automatically updates when data on the server changes.  Data which changes can be model data (configuration, untime state or hiostorical data) or PLC data.
 		</p>
 		<p>
 			It is possible to edit the model from the browser for example adding new units, editing or adding nodes, editing SVG graphics.  All such changes cause the UI to update without refresh.
@@ -70,6 +68,42 @@
 		  <p>
 			  The server subscribes to PLC data via the defined nodes.  The UI can also subscribe directly to nodes for display of devices.
 		  </p>
+		 <h3>
+			<a id="what" class="anchor" href="#what" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+			What's going on?
+		</h3>
+		<p>
+			The server exposes the configuration, runtime and historical model as an OData web api with <a href="http://www.getbreezenow.com/">Breeze</a>.  It is possible to edit the configuration model with a SaveChanges method and commands are made available over runtime entities.  There is also an API for authorisation.
+		</p>
+		<p>
+			The entity framework context used by the server has been extended so any changes made through it are published using SignalR.
+		</p>
+
+		<p>
+			The client uses the metadata exposed by breeze to add <a href="http://knockoutjs.com/">knockout</a> observables to the model received from the server.  These observables combine <a href="https://github.com/Reactive-Extensions/RxJS">RXJs</a> and knockout so that when they are observed (subscribed to) they fetch the appropriate data using the OData api and subscribe to the server for any subsequent changes.  When they stop being observed they unsubscribe (after a timeout) from the server.
+		</p>
+		<p>
+		The model can be queried from the DOM using a LINQ like syntax.  This results in the appropriate ODATA queries being sent:
+		<pre><code>
+			<ul>
+				{{#with:_subscribers.Zones().where('Name', 'startsWith', 'hey').orderBy('Description', 'asc').skip(toSkip()).take(10).get()}}
+					{{#foreach:got()}}
+						<li>
+							{{Name}}
+						<li>
+					{{/foreach}}
+				{{/with}}
+			</ul>
+		</code></pre>
+		This paged list will be automatically updated as data on the server changes.
+		</p>
+		<p>
+			Various entities have one or more <em>nodes</em> associated with them.  A node points at some PLC data which the server can obtain as a client to an OPC Server.  The client decorates these entities with observables which when subscribed to and unsubscribed from create and destroy a subscription to the node on the server which in turn subscribes to and unsubscribes from the OPC Server and publishes the data and any changes.  The server manages multiple subscriptions from clients so many subscriptions will only result in one server side subscription to the OPC Server.
+		</p>
+		<p>
+			The server also subscribes to PLC data as defined by nodes to implement <em>business logic</em>.  For example raising and handshaking alarms or sequencing operations through units when a batch runs a step.
+		</p>
+		
 	  	<h3>
 	  		<a id="ui notes" class="anchor" href="#ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 	  		Ui notes
