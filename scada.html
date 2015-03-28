@@ -85,15 +85,15 @@
 		<p>
 		The model can be queried from the DOM using a LINQ like syntax.  This results in the appropriate ODATA queries being sent:
 		<pre><code>
-			<ul>
+			&lt;ul&gt;
 				{{#with:_subscribers.Zones().where('Name', 'startsWith', 'hey').orderBy('Description', 'asc').skip(toSkip()).take(10).get()}}
 					{{#foreach:got()}}
-						<li>
+						&lt;li&gt;
 							{{Name}}
-						<li>
+						&lt;/li&gt;
 					{{/foreach}}
 				{{/with}}
-			</ul>
+			&lt;/ul&gt;
 		</code></pre>
 		This paged list will be automatically updated as data on the server changes.
 		</p>
